@@ -1,8 +1,6 @@
 # react-b2components
 
-<img src="./logo.svg" width="100px"/>
-
-React components by <a href="b2bit.company">B2it Company</a>
+React components by <a href="https://b2bit.company">B2it Company</a>
 
 ## Installing
 
