@@ -4,7 +4,6 @@ export default styled.select`
   border: 2px solid ${(props) => props.theme.colors.gray.six};
   background: ${(props) => props.theme.colors.white};
   border-radius: ${(props) => props.theme.borderRadius};
-  font-family: ${(props) => props.theme.fontFamily};
   box-sizing: border-box;
   padding: 0 17px 0 17px;
 

@@ -17,7 +17,6 @@ export const Button = styled.button`
   border-radius: 8px;
   border: 1px solid ${(props) => props.theme.colors.gray.seven};
   font-size: ${(props) => props.theme.fontSize.small};
-  font-family: ${(props) => props.theme.fontFamily};
   font-weight: ${(props) => props.theme.fontWeight.bold};
   cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
 `;

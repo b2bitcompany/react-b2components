@@ -4,7 +4,6 @@ export default styled.input`
   border: 2px solid ${(props) => props.theme.colors.gray.six};
   background: ${(props) => props.theme.colors.white};
   border-radius: ${(props) => props.theme.borderRadius};
-  font-family: ${(props) => props.theme.fontFamily};
   color: ${(props) => props.theme.colors.gray.twelve};
 
   &:focus {

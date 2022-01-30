@@ -31,15 +31,14 @@ export default {
       text: '#02274F',
     },
   },
-  fontFamily: "'Poppins', sans-serif",
   fontSize: {
     small: '16px',
     medium: '24px',
     big: '32px',
   },
   fontWeight: {
-    bold: '700',
     semiBold: '600',
+    bold: '700',
     medium: '500',
   },
 };
