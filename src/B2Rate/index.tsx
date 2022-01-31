@@ -7,18 +7,18 @@ import { Container } from './styles';
 export interface IB2Rate {
   value: number;
   setValue?: (value: number) => void;
-  style?: React.CSSProperties;
   starSize?: number;
+  className?: string;
 }
 
 export const B2Rate: React.FC<IB2Rate> = ({
   value,
   setValue,
-  style,
   starSize = 20,
+  className,
 }) => {
   return (
-    <Container style={{ ...style }}>
+    <Container className={className}>
       {Array(5)
         .fill(0)
         .map((_, index) => {
