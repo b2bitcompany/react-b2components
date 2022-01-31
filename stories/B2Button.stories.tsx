@@ -9,6 +9,8 @@ const meta: Meta = {
   component: B2Button,
   argTypes: {
     variant: {
+      options: ['primary', 'secondary', 'outline', 'transparent'],
+      control: { type: 'radio' },
       defaultValue: 'primary',
     },
     children: {
@@ -33,21 +35,3 @@ const Template: Story<IB2Button> = (args) => (
 );
 
 export const Default = Template.bind({});
-export const Secondary = Template.bind({});
-export const Outline = Template.bind({});
-export const Transparent = Template.bind({});
-
-Secondary.args = {
-  variant: 'secondary',
-  children: 'Secondary',
-};
-
-Outline.args = {
-  variant: 'outline',
-  children: 'Outline',
-};
-
-Transparent.args = {
-  variant: 'transparent',
-  children: 'Transparent',
-};
