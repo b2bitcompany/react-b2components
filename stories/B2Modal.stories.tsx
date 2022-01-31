@@ -3,22 +3,16 @@ import React, { useRef } from 'react';
 import { Meta, Story } from '@storybook/react';
 import { useArgs } from '@storybook/client-api';
 
-import { B2Theme, B2Menu, B2MenuItem, B2Button, IB2Menu } from '../src';
+import { B2Theme, B2Button, B2Modal, IB2Modal } from '../src';
 
 const meta: Meta = {
-  title: 'B2Menu',
-  component: B2Menu,
+  title: 'B2Modal',
+  component: B2Modal,
   argTypes: {
-    isShowing: {
+    isOpen: {
       defaultValue: false,
     },
-    anchor: {
-      control: {
-        disable: true,
-      },
-    },
     className: {
-      description: 'Used to customize the component with styled-components',
       control: {
         disable: true,
       },
@@ -31,7 +25,7 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: Story<IB2Menu> = (args) => {
+const Template: Story<IB2Modal> = (args) => {
   const button = useRef(null);
   const [_, setArgs] = useArgs();
 
@@ -40,19 +34,18 @@ const Template: Story<IB2Menu> = (args) => {
       <B2Button
         variant="primary"
         onClick={() => {
-          setArgs({ ...args, isShowing: true });
+          setArgs({ ...args, isOpen: true });
         }}
         ref={button}
       >
-        Open Menu
+        Open Modal
       </B2Button>
-      <B2Menu
+      <B2Modal
         {...args}
-        onHide={() => setArgs({ ...args, isShowing: false })}
-        anchor={button.current}
+        onBackdropClick={() => setArgs({ ...args, isOpen: false })}
       >
-        <B2MenuItem>Item 1</B2MenuItem>
-      </B2Menu>
+        <span>This is a modal</span>
+      </B2Modal>
     </B2Theme>
   );
 };
