@@ -3,15 +3,23 @@ import React from 'react';
 import { Container, Modal } from './styles';
 
 export interface IB2Modal {
-  open: boolean;
-  modalStyle?: React.CSSProperties;
+  isOpen: boolean;
   children: React.ReactNode;
+  onBackdropClick?: () => void;
+  className?: string;
 }
 
-export const B2Modal: React.FC<IB2Modal> = ({ open, modalStyle, children }) => {
+export const B2Modal: React.FC<IB2Modal> = ({
+  isOpen,
+  children,
+  onBackdropClick,
+  className,
+}) => {
   return (
-    <Container open={open}>
-      <Modal style={modalStyle}>{children}</Modal>
+    <Container isOpen={isOpen} onClick={onBackdropClick}>
+      <Modal className={className} onClick={(event) => event.stopPropagation()}>
+        {children}
+      </Modal>
     </Container>
   );
 };

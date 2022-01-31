@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 interface IB2ModalContainer {
-  open: boolean;
+  isOpen: boolean;
 }
 
 export const Container = styled.div<IB2ModalContainer>`
-  display: ${(props) => (props.open ? 'flex' : 'none')};
+  display: ${(props) => (props.isOpen ? 'flex' : 'none')};
   align-items: center;
   justify-content: center;
   position: fixed;
