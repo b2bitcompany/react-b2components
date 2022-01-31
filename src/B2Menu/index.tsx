@@ -6,22 +6,24 @@ import React, {
   useEffect,
   ReactNode,
 } from 'react';
-import { MenuContainer, B2MenuItem } from './styles';
+import { MenuContainer, MenuItem } from './styles';
 
 interface IB2Menu {
-  show: boolean;
+  isShowing: boolean;
   onHide: () => void;
   anchor: HTMLElement | null;
   offset?: number;
   children: ReactNode | Array<ReactNode>;
+  className?: string;
 }
 
 const B2Menu: FC<IB2Menu> = ({
-  show,
+  isShowing,
   onHide,
   anchor,
   offset = 2,
   children,
+  className,
 }) => {
   const [position, setPosition] = useState<DOMRect>();
 
@@ -61,17 +63,29 @@ const B2Menu: FC<IB2Menu> = ({
   }, [updatePosition]);
 
   useEffect(() => {
-    if (show) {
+    const base = document.getElementById('root');
+    if (base) {
+      base.addEventListener('scroll', updatePosition);
+
+      return () => base.removeEventListener('scroll', updatePosition);
+    }
+
+    return undefined;
+  }, [updatePosition]);
+
+  useEffect(() => {
+    if (isShowing) {
       document.addEventListener('click', hide);
     }
 
     return () => document.removeEventListener('click', hide);
-  }, [hide, show]);
+  }, [hide, isShowing]);
 
   return (
     <>
-      {position && show && anchor ? (
+      {position && isShowing && anchor ? (
         <MenuContainer
+          className={className}
           style={{
             minWidth: position.width,
             left: position.x,
@@ -86,4 +100,4 @@ const B2Menu: FC<IB2Menu> = ({
   );
 };
 
-export { IB2Menu, B2Menu, B2MenuItem };
+export { IB2Menu, B2Menu, MenuItem as B2MenuItem };

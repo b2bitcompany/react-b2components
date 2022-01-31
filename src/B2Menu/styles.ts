@@ -9,7 +9,7 @@ export const MenuContainer = styled.ul`
   padding: 10px;
 `;
 
-export const B2MenuItem = styled.li`
+export const MenuItem = styled.li`
   list-style: none;
   cursor: pointer;
   margin: 5px 2px;
