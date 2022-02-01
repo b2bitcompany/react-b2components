@@ -38,7 +38,6 @@ const Template: Story<IB2Menu> = (args) => {
   return (
     <B2Theme>
       <B2Button
-        variant="primary"
         onClick={() => {
           setArgs({ ...args, isShowing: true });
         }}

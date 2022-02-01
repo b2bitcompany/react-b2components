@@ -24,7 +24,7 @@ export default meta;
 
 const Template: Story<IB2Theme> = (args) => (
   <B2Theme {...args}>
-    <B2Button variant="primary">Primary button on B2BIT Theme</B2Button>
+    <B2Button>Primary button on B2BIT Theme</B2Button>
   </B2Theme>
 );
 

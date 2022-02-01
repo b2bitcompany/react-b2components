@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 
-export interface IB2Button {
-  variant: 'primary' | 'secondary' | 'outline' | 'transparent';
+export type VariantType = 'primary' | 'secondary' | 'outline' | 'transparent';
+
+export interface IButton {
+  variant: VariantType;
 }
 
-export const B2Button = styled.button<IB2Button>`
+export const Button = styled.button<IButton>`
   background-color: ${(props) =>
     props.variant === 'primary'
       ? props.theme.colors.main
