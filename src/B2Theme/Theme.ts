@@ -1,5 +1,6 @@
 export default {
   borderRadius: '16px',
+  boxShadow: '0px 4px 16px 0px #00000040',
   sidebarIconSize: '30px',
   colors: {
     main: '#02274F',
