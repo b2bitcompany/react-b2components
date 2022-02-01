@@ -14,6 +14,12 @@ const meta: Meta = {
     currentPage: {
       defaultValue: 3,
     },
+    className: {
+      description: 'Used to customize the component with styled-components',
+      control: {
+        disable: true,
+      },
+    },
   },
   parameters: {
     controls: { expanded: true },

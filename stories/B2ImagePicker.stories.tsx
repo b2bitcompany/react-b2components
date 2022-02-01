@@ -14,6 +14,12 @@ const meta: Meta = {
     extensions: {
       defaultValue: ['jpg', 'jpeg', 'png'],
     },
+    className: {
+      description: 'Used to customize the component with styled-components',
+      control: {
+        disable: true,
+      },
+    },
   },
   parameters: {
     controls: { expanded: true },

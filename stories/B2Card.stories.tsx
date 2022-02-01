@@ -7,6 +7,14 @@ import { B2Theme, B2Card, IB2Card } from '../src';
 const meta: Meta = {
   title: 'B2Card',
   component: B2Card,
+  argTypes: {
+    className: {
+      description: 'Used to customize the component with styled-components',
+      control: {
+        disable: true,
+      },
+    },
+  },
   parameters: {
     controls: { expanded: true },
   },

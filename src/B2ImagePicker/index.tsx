@@ -16,6 +16,7 @@ export interface IB2ImagePicker {
   extensions: Array<string>;
   isLoading: boolean;
   onImageUploaded: (image: File) => void;
+  className?: string;
 }
 
 export const B2ImagePicker: React.FC<IB2ImagePicker> = ({
@@ -23,6 +24,7 @@ export const B2ImagePicker: React.FC<IB2ImagePicker> = ({
   extensions,
   isLoading,
   onImageUploaded,
+  className,
 }) => {
   const inputImageFile = useRef<HTMLInputElement>(null);
   const [image, setImage] = useState<File>();
@@ -89,7 +91,7 @@ export const B2ImagePicker: React.FC<IB2ImagePicker> = ({
   };
 
   return (
-    <Container onClick={onFileSelectorPress}>
+    <Container className={className} onClick={onFileSelectorPress}>
       {renderImage()}
 
       <input

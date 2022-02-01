@@ -7,19 +7,25 @@ export interface IB2ButtonsPage {
   pages: number;
   changePage: (newPage: number) => void;
   currentPage: number;
+  className?: string;
 }
 
 export const B2ButtonsPage: React.FC<IB2ButtonsPage> = ({
   pages,
   changePage,
   currentPage,
+  className,
 }) => {
   const buttons = useMemo(() => {
     let newButtons = [];
 
     if (currentPage !== 1) {
       newButtons.push(
-        <Button key={nanoid()} onClick={() => changePage && changePage(1)}>
+        <Button
+          key={nanoid()}
+          className={className}
+          onClick={() => changePage && changePage(1)}
+        >
           {'<<'}
         </Button>
       );
@@ -27,6 +33,7 @@ export const B2ButtonsPage: React.FC<IB2ButtonsPage> = ({
       newButtons.push(
         <Button
           key={nanoid()}
+          className={className}
           onClick={() =>
             changePage && changePage(currentPage ? currentPage - 1 : 0)
           }
@@ -41,6 +48,7 @@ export const B2ButtonsPage: React.FC<IB2ButtonsPage> = ({
         newButtons.push(
           <Button
             key={nanoid()}
+            className={className}
             onClick={() => changePage && changePage(i)}
             disabled={currentPage === i}
           >
@@ -54,6 +62,7 @@ export const B2ButtonsPage: React.FC<IB2ButtonsPage> = ({
       newButtons.push(
         <Button
           key={nanoid()}
+          className={className}
           onClick={() =>
             changePage && changePage(currentPage ? currentPage + 1 : 0)
           }
@@ -63,7 +72,11 @@ export const B2ButtonsPage: React.FC<IB2ButtonsPage> = ({
       );
 
       newButtons.push(
-        <Button key={nanoid()} onClick={() => changePage && changePage(pages)}>
+        <Button
+          key={nanoid()}
+          className={className}
+          onClick={() => changePage && changePage(pages)}
+        >
           {'>>'}
         </Button>
       );
