@@ -11,7 +11,4 @@ export * from './B2ToggleSwitch';
 export * from './B2Button';
 export * from './B2Card';
 export * from './B2Carousel';
-export * from './B2CheckBox';
-export * from './B2Select';
 export * from './B2Spinner';
-export * from './B2TextInput';
