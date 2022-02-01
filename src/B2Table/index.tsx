@@ -13,29 +13,28 @@ import {
 
 import { B2ButtonsPage } from '../B2ButtonsPage';
 
-interface IB2Table {
-  blue?: boolean;
+interface IB2Table<T> {
   headerData: Array<string>;
-  tableData: Array<any>;
-  tableEmptyComponent: () => React.ReactElement;
-  renderRow: (value: any, index: number) => React.ReactElement;
+  data: Array<T>;
+  renderRow: (value: T, index: number) => React.ReactElement;
+  emptyTableComponent?: () => React.ReactElement;
   paginator?: boolean;
-  total?: number;
+  amountPerPage?: number;
   changePage?: (newPage: number) => void;
   currentPage?: number;
 }
 
-const B2Table: React.FC<IB2Table> = ({
+const B2Table = <T extends unknown>({
   headerData,
-  tableData,
-  tableEmptyComponent,
+  data,
   renderRow,
+  emptyTableComponent,
   paginator,
-  total,
+  amountPerPage,
   changePage,
   currentPage,
-}) => {
-  const pages = total ? Math.ceil(total / 20) : 0;
+}: IB2Table<T>) => {
+  const pages = amountPerPage ? Math.ceil(data.length / amountPerPage) : 0;
 
   const renderHeader = () => {
     return (
@@ -52,29 +51,22 @@ const B2Table: React.FC<IB2Table> = ({
   };
 
   const renderBody = () => {
-    let data = tableData;
-    if (paginator) {
-      data = tableData.slice(0, 20);
+    if (paginator && amountPerPage && currentPage) {
+      return data.slice(0, amountPerPage).map(renderRow);
     }
 
-    return (
-      <TableBody>
-        {data.map((value, index) => renderRow(value, index))}
-      </TableBody>
-    );
+    return data.map(renderRow);
   };
 
   const renderEmptyComponent = () => {
     const spanSize = headerData.length;
-    if (tableData === null || tableData?.length === 0) {
+    if (data?.length && emptyTableComponent) {
       return (
-        <TableBody>
-          <TableRow>
-            <TableDataCell colSpan={spanSize}>
-              {tableEmptyComponent()}
-            </TableDataCell>
-          </TableRow>
-        </TableBody>
+        <TableRow>
+          <TableDataCell colSpan={spanSize}>
+            {emptyTableComponent()}
+          </TableDataCell>
+        </TableRow>
       );
     }
 
@@ -82,6 +74,12 @@ const B2Table: React.FC<IB2Table> = ({
   };
 
   const renderButtons = () => {
+    if (paginator && (!changePage || !currentPage || pages === undefined)) {
+      throw new Error(
+        'You must provide a changePage function, currentPage value and pages value to render the paginator'
+      );
+    }
+
     if (paginator && changePage && currentPage && pages > 1) {
       return (
         <B2ButtonsPage
@@ -99,8 +97,9 @@ const B2Table: React.FC<IB2Table> = ({
     <Container>
       <Table>
         {renderHeader()}
-        {tableData !== null ? renderBody() : null}
-        {renderEmptyComponent()}
+        <TableBody>
+          {data.length ? renderBody() : renderEmptyComponent()}
+        </TableBody>
       </Table>
       {renderButtons()}
     </Container>
