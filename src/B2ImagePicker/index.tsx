@@ -3,6 +3,7 @@ import React, { useState, useRef } from 'react';
 import { MdCameraAlt } from 'react-icons/md';
 
 import { B2Spinner } from '../B2Spinner';
+
 import {
   Container,
   Image,
@@ -83,7 +84,7 @@ export const B2ImagePicker: React.FC<IB2ImagePicker> = ({
 
     return (
       <CameraContainer>
-        <MdCameraAlt size={36} style={{ color: '#3E699F' }} />
+        <MdCameraAlt size={36} />
         <ImageText>{text}</ImageText>
         <ImageTypes>{extensions.join(', ')}</ImageTypes>
       </CameraContainer>
