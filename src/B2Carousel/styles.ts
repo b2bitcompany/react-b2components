@@ -56,7 +56,7 @@ export const Header = styled.div`
 
 export const HeaderText = styled.span<IHeaderText>`
   color: ${(props) =>
-    props.selected ? props.theme.colors.black : props.theme.colors.gray.nine};
+    props.selected ? props.theme.colors.main : props.theme.colors.gray.nine};
   font-size: ${(props) => props.theme.fontSize.small};
   font-weight: ${(props) => props.theme.fontWeight.semiBold};
   position: relative;

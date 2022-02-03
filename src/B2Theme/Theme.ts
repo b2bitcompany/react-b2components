@@ -3,7 +3,7 @@ export default {
   boxShadow: '0px 4px 16px 0px #00000040',
   sidebarIconSize: '30px',
   colors: {
-    main: '#02274F',
+    main: '#FFFFFF',
     secondary: '#FDCF00',
     info: '#2F80ED',
     success: '#27AE60',
@@ -26,10 +26,10 @@ export default {
       twelve: '#4D4D4D',
     },
     buttonText: {
-      primary: '#FFFFFF',
+      primary: '#02274F',
       secondary: '#FFFFFF',
-      outline: '#02274F',
-      text: '#02274F',
+      outline: '#FFFFFF',
+      text: '#FFFFFF',
     },
   },
   fontSize: {

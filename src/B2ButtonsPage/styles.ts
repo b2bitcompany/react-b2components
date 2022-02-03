@@ -8,9 +8,11 @@ export const ButtonContainer = styled.div`
 
 export const Button = styled.button`
   background-color: ${(props) =>
-    props.disabled ? props.theme.colors.main : props.theme.colors.white};
+    props.disabled ? props.theme.colors.main : props.theme.colors.secondary};
   color: ${(props) =>
-    props.disabled ? props.theme.colors.white : props.theme.colors.black};
+    props.disabled
+      ? props.theme.colors.buttonText.primary
+      : props.theme.colors.buttonText.secondary};
   width: 40px;
   height: 40px;
   margin: 30px 5px;
