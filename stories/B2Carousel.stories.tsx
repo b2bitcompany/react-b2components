@@ -6,7 +6,7 @@ import { useArgs } from '@storybook/client-api';
 import { B2Theme, B2Carousel, IB2Carousel } from '../src';
 
 const meta: Meta = {
-  title: 'B2carousel',
+  title: 'B2Carousel',
   component: B2Carousel,
   argTypes: {
     options: {
