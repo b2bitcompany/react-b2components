@@ -10,7 +10,7 @@ export default {
     danger: '#E2B93B',
     error: '#EB5757',
     black: '#000000',
-    white: '#ffffff',
+    white: '#FFFFFF',
     gray: {
       one: '#D9D9D9',
       two: '#CCCCCC',
