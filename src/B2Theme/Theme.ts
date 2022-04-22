@@ -1,7 +1,6 @@
 export default {
   borderRadius: '16px',
   boxShadow: '0px 4px 16px 0px #00000040',
-  sidebarIconSize: '30px',
   colors: {
     main: '#FFFFFF',
     secondary: '#FDCF00',
@@ -9,37 +8,11 @@ export default {
     success: '#27AE60',
     danger: '#E2B93B',
     error: '#EB5757',
-    black: '#000000',
-    white: '#FFFFFF',
-    gray: {
-      one: '#D9D9D9',
-      two: '#CCCCCC',
-      three: '#BFBFBF',
-      four: '#BFBFBF',
-      five: '#B2B2B2',
-      six: '#999999',
-      seven: '#8C8C8C',
-      eight: '#808080',
-      nine: '#737373',
-      ten: '#666666',
-      eleven: '#595959',
-      twelve: '#4D4D4D',
-    },
     buttonText: {
       primary: '#02274F',
       secondary: '#FFFFFF',
       outline: '#FFFFFF',
       text: '#FFFFFF',
     },
-  },
-  fontSize: {
-    small: '16px',
-    medium: '24px',
-    big: '32px',
-  },
-  fontWeight: {
-    semiBold: '600',
-    bold: '700',
-    medium: '500',
   },
 };

@@ -30,12 +30,12 @@ export const Image = styled.img`
 `;
 
 export const ImageText = styled.span`
-  font-weight: ${(props) => props.theme.fontWeight.bold};
+  font-weight: '700';
   font-size: 12px;
   margin-bottom: 5px;
 `;
 
 export const ImageTypes = styled.span`
-  font-weight: ${(props) => props.theme.fontWeight.medium};
+  font-weight: '500';
   font-size: 10px;
 `;

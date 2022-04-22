@@ -6,7 +6,6 @@ import defaultTheme from './Theme';
 export interface ITheme {
   borderRadius: string;
   boxShadow: string;
-  sidebarIconSize: string;
   colors: {
     main: string;
     secondary: string;
@@ -14,22 +13,6 @@ export interface ITheme {
     success: string;
     danger: string;
     error: string;
-    black: string;
-    white: string;
-    gray: {
-      one: string;
-      two: string;
-      three: string;
-      four: string;
-      five: string;
-      six: string;
-      seven: string;
-      eight: string;
-      nine: string;
-      ten: string;
-      eleven: string;
-      twelve: string;
-    };
     buttonText: {
       primary: string;
       secondary: string;
@@ -37,26 +20,16 @@ export interface ITheme {
       text: string;
     };
   };
-  fontSize: {
-    small: string;
-    medium: string;
-    big: string;
-  };
-  fontWeight: {
-    semiBold: string;
-    bold: string;
-    medium: string;
-  };
 }
 
-export interface IB2Theme {
-  theme?: ITheme;
+export interface IB2Theme<Type> {
+  theme?: Type;
   children: React.ReactNode;
 }
 
-export const B2Theme: React.FC<IB2Theme> = ({
-  theme = defaultTheme,
+export const B2Theme = <Type extends ITheme>({
+  theme = defaultTheme as Type,
   children,
-}) => {
+}: IB2Theme<Type>) => {
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 };

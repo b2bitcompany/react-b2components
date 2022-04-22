@@ -21,7 +21,7 @@ export const Button = styled.button<IButton>`
       : props.variant === 'outline'
       ? props.theme.colors.buttonText.outline
       : props.theme.colors.buttonText.text};
-  font-weight: ${(props) => props.theme.fontWeight.semiBold};
+  font-weight: '600';
   font-size: 16px;
   border-radius: ${(props) => props.theme.borderRadius};
   border: ${(props) =>
