@@ -60,7 +60,7 @@ const B2Table = <T extends unknown>({
 
   const renderEmptyComponent = () => {
     const spanSize = headerData.length;
-    if (data?.length && emptyTableComponent) {
+    if (emptyTableComponent) {
       return (
         <TableRow>
           <TableDataCell colSpan={spanSize}>

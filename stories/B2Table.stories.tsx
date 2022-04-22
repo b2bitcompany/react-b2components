@@ -32,13 +32,13 @@ const meta: Meta = {
     },
     renderRow: {
       defaultValue: (item: IData) => (
-        <B2TableRow>
+        <B2TableRow key={item.id}>
           <B2TableDataCell>{item.id}</B2TableDataCell>
           <B2TableDataCell>{item.name}</B2TableDataCell>
         </B2TableRow>
       ),
     },
-    emptyListComponent: {
+    emptyTableComponent: {
       defaultValue: () => <span>Empty list</span>,
     },
   },
