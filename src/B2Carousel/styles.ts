@@ -55,8 +55,7 @@ export const Header = styled.div`
 `;
 
 export const HeaderText = styled.span<IHeaderText>`
-  color: ${(props) =>
-    props.selected ? props.theme.colors.main : props.theme.colors.gray.nine};
+  color: ${(props) => (props.selected ? props.theme.colors.main : '#737373')};
   font-size: 16px;
   font-weight: '600';
   position: relative;
@@ -64,7 +63,7 @@ export const HeaderText = styled.span<IHeaderText>`
 
   &:after {
     content: '';
-    background-color: ${(props) => props.theme.colors.gray.nine};
+    background-color: '#737373';
     width: 100%;
     height: 1px;
     position: absolute;

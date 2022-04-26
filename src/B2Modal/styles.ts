@@ -20,7 +20,7 @@ export const Container = styled.div<IB2ModalContainer>`
 `;
 
 export const Modal = styled.div`
-  background-color: ${(props) => props.theme.colors.white};
+  background-color: '#FFFFFF';
   border-radius: ${(props) => props.theme.borderRadius};
   padding: 20px;
   animation: fade-in 0.5s ease-out, show-upwards 0.5s ease-out;
