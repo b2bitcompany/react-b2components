@@ -18,7 +18,7 @@ export const B2Switch: React.FC<IB2Switch> = ({ isChecked, onChange }) => {
         id={id}
         type="checkbox"
         checked={isChecked}
-        onClick={onChange}
+        onChange={onChange}
       />
       <CheckBoxLabel htmlFor={id} />
     </CheckBoxWrapper>
