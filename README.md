@@ -1,6 +1,6 @@
 # react-b2components
 
-React components by <a href="https://b2bit.company">B2it Company</a>
+React components by <a href="https://b2bit.company">B2bit Company</a>
 
 ## Installing
 
