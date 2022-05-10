@@ -22,6 +22,7 @@ interface IB2Table<T> {
   amountPerPage?: number;
   changePage?: (newPage: number) => void;
   currentPage?: number;
+  total?: number;
 }
 
 const B2Table = <T extends unknown>({
@@ -33,8 +34,9 @@ const B2Table = <T extends unknown>({
   amountPerPage,
   changePage,
   currentPage,
+  total,
 }: IB2Table<T>) => {
-  const pages = amountPerPage ? Math.ceil(data.length / amountPerPage) : 0;
+  const pages = amountPerPage && total ? Math.ceil(total / amountPerPage) : 0;
 
   const renderHeader = () => {
     return (
@@ -76,7 +78,7 @@ const B2Table = <T extends unknown>({
   const renderButtons = () => {
     if (paginator && (!changePage || !currentPage || pages === undefined)) {
       throw new Error(
-        'You must provide a changePage function, currentPage value and pages value to render the paginator'
+        'You must provide a changePage function, currentPage value and total value to render the paginator'
       );
     }
 
