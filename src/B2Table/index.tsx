@@ -23,6 +23,7 @@ interface IB2Table<T> {
   changePage?: (newPage: number) => void;
   currentPage?: number;
   total?: number;
+  className?: string;
 }
 
 const B2Table = <T extends unknown>({
@@ -35,6 +36,7 @@ const B2Table = <T extends unknown>({
   changePage,
   currentPage,
   total,
+  className,
 }: IB2Table<T>) => {
   const pages = amountPerPage && total ? Math.ceil(total / amountPerPage) : 0;
 
@@ -96,7 +98,7 @@ const B2Table = <T extends unknown>({
   };
 
   return (
-    <Container>
+    <Container className={className}>
       <Table>
         {renderHeader()}
         <TableBody>
