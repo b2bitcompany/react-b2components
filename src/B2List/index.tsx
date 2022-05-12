@@ -4,6 +4,8 @@ import { nanoid } from 'nanoid';
 
 import { B2ButtonsPage } from '../B2ButtonsPage';
 
+import { Container } from './styles';
+
 export interface IB2List<T> {
   data: Array<T>;
   renderItem: (item: T, index: number) => React.ReactElement;
@@ -13,6 +15,8 @@ export interface IB2List<T> {
   amountPerPage?: number;
   changePage?: (newPage: number) => void;
   currentPage?: number;
+  total?: number;
+  className?: string;
 }
 
 export const B2List = <T extends unknown>({
@@ -24,8 +28,10 @@ export const B2List = <T extends unknown>({
   amountPerPage,
   changePage,
   currentPage,
+  total,
+  className,
 }: IB2List<T>) => {
-  const pages = amountPerPage ? Math.ceil(data.length / amountPerPage) : 0;
+  const pages = amountPerPage && total ? Math.ceil(total / amountPerPage) : 0;
 
   const renderData = () => {
     if (paginator && amountPerPage && currentPage) {
@@ -44,7 +50,7 @@ export const B2List = <T extends unknown>({
   const renderButtons = () => {
     if (paginator && (!changePage || !currentPage || pages === undefined)) {
       throw new Error(
-        'You must provide a changePage function, currentPage value and pages value to render the paginator'
+        'You must provide a changePage function, currentPage value and total value to render the paginator'
       );
     }
 
@@ -66,10 +72,10 @@ export const B2List = <T extends unknown>({
   }
 
   return (
-    <>
+    <Container className={className}>
       {header}
       {renderData()}
       {renderButtons()}
-    </>
+    </Container>
   );
 };

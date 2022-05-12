@@ -54,4 +54,5 @@ WithPaginator.args = {
     console.log('newPage', newPage);
   },
   currentPage: 1,
+  total: 6,
 };
