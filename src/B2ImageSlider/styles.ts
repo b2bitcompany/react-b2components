@@ -1,16 +1,32 @@
-import styled from 'styled-components';
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
+import styled, { css } from 'styled-components';
+
+interface IArrow {
+  disabled: boolean;
+}
 
 export const SliderContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  position: relative;
-  display: inline-block;
+  color: ${(props) => props.theme.colors.main};
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 18px;
 `;
 
 export const SliderImage = styled.img`
-  width: 400px;
-  height: 500px;
-  border-radius: 8px;
+  border-radius: ${(props) => props.theme.borderRadius};
 `;
 
-export const ImageContainer = styled.div``;
+const arrowStyle = css<IArrow>`
+  width: 50px;
+  height: 50px;
+  cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
+`;
+
+export const ArrowLeft = styled(MdKeyboardArrowLeft)<IArrow>`
+  ${arrowStyle}
+`;
+
+export const ArrowRight = styled(MdKeyboardArrowRight)<IArrow>`
+  ${arrowStyle}
+`;

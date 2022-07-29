@@ -1,88 +1,53 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
-import {
-  MdKeyboardArrowLeft,
-  MdKeyboardArrowRight,
-  MdClose,
-} from 'react-icons/md';
+import { SliderContainer, SliderImage, ArrowLeft, ArrowRight } from './styles';
 
-import { SliderContainer, SliderImage, ImageContainer } from './styles';
-
-export interface ISliderProps {
-  imgIndex: string;
-  onClose: () => void;
-  imgData: {
-    id: string;
-    type: string;
+export interface IB2ImageSlider {
+  images: Array<{
+    alt: string;
     url: string;
-  }[];
+  }>;
+  onChangeImage?: (index: number) => void;
+  disablePrevious?: boolean;
+  disableNext?: boolean;
+  className?: string;
 }
 
-export const ImageSlider: React.FC<ISliderProps> = ({
-  imgData,
-  imgIndex,
-  onClose,
+export const B2ImageSlider: React.FC<IB2ImageSlider> = ({
+  images,
+  onChangeImage,
+  disablePrevious = false,
+  disableNext = false,
+  className,
 }) => {
-  const imgIndexNum = Number(imgIndex);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const length = imgData.length;
-
-  useEffect(() => {
-    setCurrentSlide(imgIndexNum);
-  }, [imgIndexNum]);
 
   const nextSlide = () => {
-    setCurrentSlide(currentSlide === length - 1 ? 0 : currentSlide + 1);
+    if (disableNext) {
+      return;
+    }
+    const newIndex = currentSlide === images.length - 1 ? 0 : currentSlide + 1;
+    setCurrentSlide(newIndex);
+    onChangeImage?.(newIndex);
   };
 
   const prevSlide = () => {
-    setCurrentSlide(currentSlide === 0 ? length - 1 : currentSlide - 1);
+    if (disablePrevious) {
+      return;
+    }
+    const newIndex = currentSlide === 0 ? images.length - 1 : currentSlide - 1;
+    setCurrentSlide(newIndex);
+    onChangeImage?.(newIndex);
   };
 
   return (
-    <SliderContainer>
-      <MdKeyboardArrowLeft
-        style={{
-          position: 'absolute',
-          top: '50%',
-          left: '0',
-          fontSize: '32px',
-          cursor: 'pointer',
-        }}
-        onClick={prevSlide}
+    <SliderContainer className={className}>
+      <ArrowLeft onClick={prevSlide} disabled={disablePrevious} />
+      <SliderImage
+        src={images[currentSlide].url}
+        alt={images[currentSlide].alt}
       />
-      {imgData.map((img, index) => {
-        return (
-          <ImageContainer
-            className={index === currentSlide ? 'slide active' : 'slide'}
-            key={img.id}
-          >
-            {index === currentSlide && (
-              <SliderImage src={img.url} alt={img.type} />
-            )}
-          </ImageContainer>
-        );
-      })}
-      <MdClose
-        onClick={onClose}
-        style={{
-          position: 'absolute',
-          top: '0',
-          right: '0',
-          fontSize: '32px',
-          cursor: 'pointer',
-        }}
-      />
-      <MdKeyboardArrowRight
-        style={{
-          position: 'absolute',
-          top: '50%',
-          right: '0',
-          fontSize: '32px',
-          cursor: 'pointer',
-        }}
-        onClick={nextSlide}
-      />
+      <ArrowRight onClick={nextSlide} disabled={disableNext} />
     </SliderContainer>
   );
 };
