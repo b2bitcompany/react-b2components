@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 
-import { SliderContainer, SliderImage, ArrowLeft, ArrowRight } from './styles';
+import {
+  SliderContainer,
+  SliderImage,
+  ArrowLeft,
+  ArrowRight,
+  SliderImageContainer,
+  SliderImageSubtitle,
+} from './styles';
 
 export interface IB2ImageSlider {
   images: Array<{
@@ -26,7 +33,7 @@ export const B2ImageSlider: React.FC<IB2ImageSlider> = ({
     if (disableNext) {
       return;
     }
-    const newIndex = currentSlide === images.length - 1 ? 0 : currentSlide + 1;
+    const newIndex = (currentSlide + 1) % images.length;
     setCurrentSlide(newIndex);
     onChangeImage?.(newIndex);
   };
@@ -35,7 +42,7 @@ export const B2ImageSlider: React.FC<IB2ImageSlider> = ({
     if (disablePrevious) {
       return;
     }
-    const newIndex = currentSlide === 0 ? images.length - 1 : currentSlide - 1;
+    const newIndex = (currentSlide - 1) % images.length;
     setCurrentSlide(newIndex);
     onChangeImage?.(newIndex);
   };
@@ -43,10 +50,13 @@ export const B2ImageSlider: React.FC<IB2ImageSlider> = ({
   return (
     <SliderContainer className={className}>
       <ArrowLeft onClick={prevSlide} disabled={disablePrevious} />
-      <SliderImage
-        src={images[currentSlide].url}
-        alt={images[currentSlide].alt}
-      />
+      <SliderImageContainer>
+        <SliderImage
+          src={images[currentSlide].url}
+          alt={images[currentSlide].alt}
+        />
+        <SliderImageSubtitle>{images[currentSlide].alt}</SliderImageSubtitle>
+      </SliderImageContainer>
       <ArrowRight onClick={nextSlide} disabled={disableNext} />
     </SliderContainer>
   );

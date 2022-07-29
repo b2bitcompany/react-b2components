@@ -1,5 +1,6 @@
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 import styled, { css } from 'styled-components';
+
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 
 interface IArrow {
   disabled: boolean;
@@ -11,6 +12,12 @@ export const SliderContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   font-size: 18px;
+`;
+
+export const SliderImageContainer = styled.div``;
+
+export const SliderImageSubtitle = styled.p`
+  text-align: center;
 `;
 
 export const SliderImage = styled.img`
