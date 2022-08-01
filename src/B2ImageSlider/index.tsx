@@ -52,10 +52,12 @@ export const B2ImageSlider: React.FC<IB2ImageSlider> = ({
       <ArrowLeft onClick={prevSlide} disabled={disablePrevious} />
       <SliderImageContainer>
         <SliderImage
-          src={images[currentSlide].url}
-          alt={images[currentSlide].alt}
+          src={images.at(currentSlide)?.url}
+          alt={images.at(currentSlide)?.alt}
         />
-        <SliderImageSubtitle>{images[currentSlide].alt}</SliderImageSubtitle>
+        <SliderImageSubtitle>
+          {images.at(currentSlide)?.alt}
+        </SliderImageSubtitle>
       </SliderImageContainer>
       <ArrowRight onClick={nextSlide} disabled={disableNext} />
     </SliderContainer>
