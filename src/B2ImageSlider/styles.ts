@@ -22,6 +22,7 @@ export const SliderImageSubtitle = styled.p`
 
 export const SliderImage = styled.img`
   border-radius: ${(props) => props.theme.borderRadius};
+  user-select: none;
 `;
 
 const arrowStyle = css<IArrow>`
