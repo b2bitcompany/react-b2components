@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   color: ${(props) => props.theme.colors.main};
   width: 165px;
-  height: 133px;
+  height: 165px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,7 +16,7 @@ export const Container = styled.div`
 
 export const CameraContainer = styled.div`
   width: 165px;
-  height: 133px;
+  height: 165px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,12 +30,16 @@ export const Image = styled.img`
 `;
 
 export const ImageText = styled.span`
-  font-weight: '700';
+  font-weight: 700;
   font-size: 12px;
   margin-bottom: 5px;
 `;
 
 export const ImageTypes = styled.span`
-  font-weight: '500';
+  font-weight: 500;
   font-size: 10px;
+`;
+
+export const Input = styled.input`
+  display: none;
 `;
