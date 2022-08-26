@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 
 import { MdCameraAlt } from 'react-icons/md';
 
@@ -10,68 +10,64 @@ import {
   ImageText,
   ImageTypes,
   CameraContainer,
+  Input,
 } from './styles';
 
 export interface IB2ImagePicker {
   text: string;
   extensions: Array<string>;
-  isLoading: boolean;
-  onImageUploaded: (image: File) => void;
+  maxSize: number;
+  onChooseImage: (image: File) => Promise<boolean>;
+  onInvalidExtension: () => void;
+  onInvalidSize: () => void;
   className?: string;
 }
 
 export const B2ImagePicker: React.FC<IB2ImagePicker> = ({
   text,
   extensions,
-  isLoading,
-  onImageUploaded,
+  maxSize,
+  onChooseImage,
+  onInvalidExtension,
+  onInvalidSize,
   className,
 }) => {
   const inputImageFile = useRef<HTMLInputElement>(null);
+
+  const [isLoading, setIsLoading] = useState(false);
   const [image, setImage] = useState<File>();
 
-  const imageIsTooBig = (chosenImage: File) => {
-    if (chosenImage.size > 5000000) {
-      alert(
-        'A imagem selecionada é grande demais. Por favor, selecione imagens com tamanho até 5MB.'
-      );
-      return true;
-    }
-    return false;
+  const isExtensionValid = (chosenImage: File) => {
+    return extensions.includes(chosenImage.type);
   };
 
-  const imageHasUnsupportedExtension = (chosenImage: File) => {
-    const extension = chosenImage.type.split('/')[1];
-    if (!extensions.includes(extension)) {
-      alert(
-        `Extensão do arquivo não é suportada. Por favor, envie imagens ` +
-          extensions.join(', ')
-      );
-      return true;
-    }
-    return false;
-  };
-
-  const isImageValid = (chosenImage: File) => {
-    if (imageHasUnsupportedExtension(chosenImage)) return false;
-    if (imageIsTooBig(chosenImage)) return false;
-    return true;
-  };
-
-  const onFileSelectorPress = () => {
-    if (inputImageFile.current) {
-      inputImageFile.current.click();
-    }
-  };
-
-  const onImageChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    if (event.target.files && event.target.files[0]) {
-      if (isImageValid(event.target.files[0])) {
-        setImage(event.target.files[0]);
-        onImageUploaded(event.target.files[0]);
+  const onImageChange: React.ChangeEventHandler<HTMLInputElement> = useCallback(
+    async (event) => {
+      const file = event.target.files?.[0];
+      if (!file) {
+        return;
       }
-    }
-  };
+
+      if (!isExtensionValid(file)) {
+        onInvalidExtension();
+        return;
+      }
+
+      if (file.size > maxSize) {
+        onInvalidSize();
+        return;
+      }
+
+      setIsLoading(true);
+      const result = await onChooseImage(file);
+      setIsLoading(false);
+
+      if (result) {
+        setImage(file);
+      }
+    },
+    []
+  );
 
   const renderImage = () => {
     if (isLoading) {
@@ -86,20 +82,23 @@ export const B2ImagePicker: React.FC<IB2ImagePicker> = ({
       <CameraContainer>
         <MdCameraAlt size={36} />
         <ImageText>{text}</ImageText>
-        <ImageTypes>{extensions.join(', ')}</ImageTypes>
+        <ImageTypes>
+          {extensions.join(', ').replaceAll('image/', '')}
+        </ImageTypes>
       </CameraContainer>
     );
   };
 
   return (
-    <Container className={className} onClick={onFileSelectorPress}>
+    <Container
+      className={className}
+      onClick={() => inputImageFile.current?.click()}
+    >
       {renderImage()}
-
-      <input
-        type="file"
-        id="file"
+      <Input
         ref={inputImageFile}
-        style={{ display: 'none' }}
+        type="file"
+        accept={extensions.join(',')}
         onChange={onImageChange}
       />
     </Container>
