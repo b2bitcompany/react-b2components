@@ -17,7 +17,9 @@ export interface IB2ImagePicker {
   text: string;
   extensions: Array<string>;
   maxSize: number;
-  onChooseImage: (image: File) => Promise<boolean>;
+  imageUrl?: string;
+  imageAlt: string;
+  onChooseImage: (image: File) => Promise<void>;
   onInvalidExtension: () => void;
   onInvalidSize: () => void;
   className?: string;
@@ -27,6 +29,8 @@ export const B2ImagePicker: React.FC<IB2ImagePicker> = ({
   text,
   extensions,
   maxSize,
+  imageUrl,
+  imageAlt,
   onChooseImage,
   onInvalidExtension,
   onInvalidSize,
@@ -35,7 +39,6 @@ export const B2ImagePicker: React.FC<IB2ImagePicker> = ({
   const inputImageFile = useRef<HTMLInputElement>(null);
 
   const [isLoading, setIsLoading] = useState(false);
-  const [image, setImage] = useState<File>();
 
   const isExtensionValid = (chosenImage: File) => {
     return extensions.includes(chosenImage.type);
@@ -59,12 +62,8 @@ export const B2ImagePicker: React.FC<IB2ImagePicker> = ({
       }
 
       setIsLoading(true);
-      const result = await onChooseImage(file);
+      await onChooseImage(file);
       setIsLoading(false);
-
-      if (result) {
-        setImage(file);
-      }
     },
     []
   );
@@ -74,8 +73,8 @@ export const B2ImagePicker: React.FC<IB2ImagePicker> = ({
       return <B2Spinner />;
     }
 
-    if (image) {
-      return <Image src={URL.createObjectURL(image)} alt={text} />;
+    if (imageUrl) {
+      return <Image src={imageUrl} alt={imageAlt} />;
     }
 
     return (

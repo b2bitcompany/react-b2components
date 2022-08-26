@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Meta, Story } from '@storybook/react';
+import { useArgs } from '@storybook/client-api';
 
 import { B2Theme, B2ImagePicker, IB2ImagePicker } from '../src';
 
@@ -16,10 +17,10 @@ const meta: Meta = {
     },
     maxSize: {
       defaultValue: 5000000,
+      description: 'Max size in megabytes',
     },
-    onChooseImage: {
-      defaultValue: () =>
-        new Promise((resolve) => setTimeout(() => resolve(true), 2000)),
+    imageAlt: {
+      defaultValue: 'Image picker',
     },
     onInvalidExtension: {
       defaultValue: () => alert('Invalid Extension'),
@@ -41,10 +42,19 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: Story<IB2ImagePicker> = (args) => (
-  <B2Theme>
-    <B2ImagePicker {...args} />
-  </B2Theme>
-);
+const Template: Story<IB2ImagePicker> = (args) => {
+  const [_, setArgs] = useArgs();
+
+  return (
+    <B2Theme>
+      <B2ImagePicker
+        {...args}
+        onChooseImage={async (image) => {
+          setArgs({ ...args, imageUrl: URL.createObjectURL(image) });
+        }}
+      />
+    </B2Theme>
+  );
+};
 
 export const Default = Template.bind({});

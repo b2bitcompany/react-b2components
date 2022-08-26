@@ -9,19 +9,18 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  border: 1.5px dashed ${(props) => props.theme.colors.main};
-  border-radius: 8px;
-  margin-top: 10px;
+  padding: 10px;
 `;
 
 export const CameraContainer = styled.div`
-  width: 165px;
-  height: 165px;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
+  border: 1.5px dashed ${(props) => props.theme.colors.main};
+  border-radius: 8px;
 `;
 
 export const Image = styled.img`
