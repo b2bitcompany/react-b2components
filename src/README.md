@@ -13,7 +13,7 @@ $ yarn storybook
 - stories
   - Documentation using storybook lib
 
-## Publish
+## Publish to NPM
 
 1. Login into B2Bit npm account:
 
@@ -25,3 +25,11 @@ $ yarn storybook
    ```
    $ yarn publish
    ```
+
+## Publish storybook to Chromatic
+
+run the command:
+
+```bash
+  npx chromatic --project-token=$CHROMATIC_PROJECT_TOKEN
+```
