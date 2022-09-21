@@ -2,8 +2,6 @@ import React, { useState, useRef, useCallback } from 'react';
 
 import { MdCameraAlt } from 'react-icons/md';
 
-import { B2Spinner } from '../B2Spinner';
-
 import {
   Container,
   Image,
@@ -22,6 +20,7 @@ export interface IB2ImagePicker {
   onChooseImage: (image: File) => Promise<void>;
   onInvalidExtension: () => void;
   onInvalidSize: () => void;
+  loadingComponent: React.ElementType;
   className?: string;
 }
 
@@ -34,6 +33,7 @@ export const B2ImagePicker: React.FC<IB2ImagePicker> = ({
   onChooseImage,
   onInvalidExtension,
   onInvalidSize,
+  loadingComponent: Loading,
   className,
 }) => {
   const inputImageFile = useRef<HTMLInputElement>(null);
@@ -70,7 +70,7 @@ export const B2ImagePicker: React.FC<IB2ImagePicker> = ({
 
   const renderImage = () => {
     if (isLoading) {
-      return <B2Spinner />;
+      return <Loading />;
     }
 
     if (imageUrl) {

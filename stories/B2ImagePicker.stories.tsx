@@ -28,6 +28,17 @@ const meta: Meta = {
     onInvalidSize: {
       defaultValue: () => alert('Invalid Size'),
     },
+    loadingComponent: {
+      defaultValue: () => (
+        <div
+          style={{
+            color: 'white',
+          }}
+        >
+          Loading...
+        </div>
+      ),
+    },
     className: {
       description: 'Used to customize the component with styled-components',
       control: {
@@ -50,6 +61,7 @@ const Template: Story<IB2ImagePicker> = (args) => {
       <B2ImagePicker
         {...args}
         onChooseImage={async (image) => {
+          await new Promise((resolve) => setTimeout(resolve, 2000));
           setArgs({ ...args, imageUrl: URL.createObjectURL(image) });
         }}
       />
