@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Card } from './styles';
 
-export interface IB2Card {
+export interface IB2Card extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   className?: string;
 }
