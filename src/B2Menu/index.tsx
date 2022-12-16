@@ -5,7 +5,6 @@ import React, {
   useCallback,
   useEffect,
   ReactNode,
-  useMemo,
 } from 'react';
 import { MenuContainer, MenuItem } from './styles';
 
@@ -27,6 +26,7 @@ const B2Menu: FC<IB2Menu> = ({
   className,
 }) => {
   const [position, setPosition] = useState<DOMRect>();
+  const [scrollParent, setScrollParent] = useState<HTMLElement | null>(null);
 
   const menuRef = useRef<HTMLUListElement>(null);
 
@@ -68,8 +68,6 @@ const B2Menu: FC<IB2Menu> = ({
     }
   }, [anchor]);
 
-  const scrollParent = useMemo(() => getScrollParent(anchor), [anchor]);
-
   useEffect(() => {
     updatePosition();
   }, [anchor, updatePosition]);
@@ -88,15 +86,20 @@ const B2Menu: FC<IB2Menu> = ({
     }
 
     return undefined;
-  }, [updatePosition]);
+  }, [scrollParent, updatePosition]);
 
   useEffect(() => {
     if (isShowing) {
       document.addEventListener('click', hide);
+
+      if (!scrollParent) {
+        const newScrollParent = getScrollParent(anchor);
+        setScrollParent(newScrollParent);
+      }
     }
 
     return () => document.removeEventListener('click', hide);
-  }, [hide, isShowing]);
+  }, [anchor, getScrollParent, hide, isShowing, scrollParent]);
 
   return (
     <>
