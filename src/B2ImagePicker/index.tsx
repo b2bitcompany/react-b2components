@@ -6,13 +6,14 @@ import {
   Container,
   Image,
   ImageText,
-  ImageTypes,
+  ImageInfoText,
   CameraContainer,
   Input,
 } from './styles';
 
 export interface IB2ImagePicker {
   text: string;
+  suggestedResolution?: string;
   extensions: Array<string>;
   maxSize: number;
   imageUrl?: string;
@@ -26,6 +27,7 @@ export interface IB2ImagePicker {
 
 export const B2ImagePicker: React.FC<IB2ImagePicker> = ({
   text,
+  suggestedResolution,
   extensions,
   maxSize,
   imageUrl,
@@ -81,9 +83,10 @@ export const B2ImagePicker: React.FC<IB2ImagePicker> = ({
       <CameraContainer>
         <MdCameraAlt size={36} />
         <ImageText>{text}</ImageText>
-        <ImageTypes>
+        <ImageInfoText>
           {extensions.join(', ').replaceAll('image/', '')}
-        </ImageTypes>
+        </ImageInfoText>
+        <ImageInfoText>{suggestedResolution}</ImageInfoText>
       </CameraContainer>
     );
   };

@@ -34,9 +34,10 @@ export const ImageText = styled.span`
   margin-bottom: 5px;
 `;
 
-export const ImageTypes = styled.span`
+export const ImageInfoText = styled.span`
   font-weight: 500;
   font-size: 10px;
+  margin-bottom: 5px;
 `;
 
 export const Input = styled.input`
