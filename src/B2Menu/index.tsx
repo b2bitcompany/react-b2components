@@ -6,6 +6,7 @@ import React, {
   useEffect,
   ReactNode,
 } from 'react';
+
 import { MenuContainer, MenuItem } from './styles';
 
 interface IB2Menu {
@@ -17,6 +18,8 @@ interface IB2Menu {
   className?: string;
 }
 
+type ScrollElement = HTMLElement | null | (Window & typeof globalThis);
+
 const B2Menu: FC<IB2Menu> = ({
   isShowing,
   onHide,
@@ -26,17 +29,21 @@ const B2Menu: FC<IB2Menu> = ({
   className,
 }) => {
   const [position, setPosition] = useState<DOMRect>();
-  const [scrollParent, setScrollParent] = useState<HTMLElement | null>(null);
+  const [scrollParent, setScrollParent] = useState<ScrollElement>(null);
 
   const menuRef = useRef<HTMLUListElement>(null);
 
   const getScrollParent = useCallback(
-    (node: HTMLElement | null): HTMLElement | null => {
+    (node: HTMLElement | null): ScrollElement => {
       if (node == null) {
         return null;
       }
 
       if (node.scrollHeight > node.clientHeight) {
+        if (node === document.documentElement) {
+          return window;
+        }
+
         return node;
       } else {
         return getScrollParent(node.parentElement);
@@ -91,15 +98,17 @@ const B2Menu: FC<IB2Menu> = ({
   useEffect(() => {
     if (isShowing) {
       document.addEventListener('click', hide);
-
-      if (!scrollParent) {
-        const newScrollParent = getScrollParent(anchor);
-        setScrollParent(newScrollParent);
-      }
     }
 
     return () => document.removeEventListener('click', hide);
-  }, [anchor, getScrollParent, hide, isShowing, scrollParent]);
+  }, [hide, isShowing]);
+
+  useEffect(() => {
+    if (!scrollParent) {
+      const newScrollParent = getScrollParent(anchor);
+      setScrollParent(newScrollParent);
+    }
+  }, [anchor, getScrollParent, scrollParent]);
 
   return (
     <>
@@ -120,4 +129,4 @@ const B2Menu: FC<IB2Menu> = ({
   );
 };
 
-export { IB2Menu, B2Menu, MenuItem as B2MenuItem };
+export { B2Menu, MenuItem as B2MenuItem };
