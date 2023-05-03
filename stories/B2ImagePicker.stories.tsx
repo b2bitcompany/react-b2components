@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { useArgs } from '@storybook/client-api';
 
-import { B2Theme, B2ImagePicker, IB2ImagePicker } from '../src';
+import { B2Theme, B2ImagePicker } from '../src';
 
 const meta: Meta = {
   title: 'B2ImagePicker',
@@ -53,20 +53,39 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: Story<IB2ImagePicker> = (args) => {
-  const [_, setArgs] = useArgs();
+type Story = StoryObj<typeof B2ImagePicker>;
 
-  return (
-    <B2Theme>
-      <B2ImagePicker
-        {...args}
-        onChooseImage={async (image) => {
-          await new Promise((resolve) => setTimeout(resolve, 2000));
-          setArgs({ ...args, imageUrl: URL.createObjectURL(image) });
+export const Default: Story = {
+  render: (args) => {
+    const [_, setArgs] = useArgs();
+
+    return (
+      <B2Theme>
+        <B2ImagePicker
+          {...args}
+          onChooseImage={async (image) => {
+            await new Promise((resolve) => setTimeout(resolve, 2000));
+            setArgs({ ...args, imageUrl: URL.createObjectURL(image) });
+          }}
+        />
+      </B2Theme>
+    );
+  },
+  args: {
+    text: 'Upload Image',
+    extensions: ['image/jpg', 'image/jpeg', 'image/png'],
+    maxSize: 5000000,
+    imageAlt: 'Image picker',
+    onInvalidExtension: () => alert('Invalid Extension'),
+    onInvalidSize: () => alert('Invalid Size'),
+    loadingComponent: () => (
+      <div
+        style={{
+          color: 'white',
         }}
-      />
-    </B2Theme>
-  );
+      >
+        Loading...
+      </div>
+    ),
+  },
 };
-
-export const Default = Template.bind({});

@@ -1,29 +1,15 @@
 import React from 'react';
 
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
-import { B2Theme, B2List, IB2List } from '../src';
+import { B2Theme, B2List } from '../src';
 
-const meta: Meta = {
+const meta: Meta<typeof B2List> = {
   title: 'B2List',
   component: B2List,
   argTypes: {
-    data: {
-      defaultValue: [
-        'Item 1',
-        'Item 2',
-        'Item 3',
-        'Item 4',
-        'Item 5',
-        'Item 6',
-      ],
-    },
     renderItem: {
       type: 'function',
-      defaultValue: (item: string) => <span>{item}</span>,
-    },
-    emptyListComponent: {
-      defaultValue: () => <span>Empty list</span>,
     },
   },
   parameters: {
@@ -33,26 +19,47 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: Story<IB2List<string>> = (args) => (
-  <B2Theme>
-    <B2List {...args} />
-  </B2Theme>
-);
+type Story = StoryObj<typeof B2List>;
 
-export const Default = Template.bind({});
-export const WithHeader = Template.bind({});
-export const WithPaginator = Template.bind({});
-
-WithHeader.args = {
-  header: <span>Header</span>,
+export const Default: Story = {
+  render: (args) => (
+    <B2Theme>
+      <B2List {...args} />
+    </B2Theme>
+  ),
+  args: {
+    data: ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6'],
+    renderItem: (item: unknown) => <span>{item as string}</span>,
+    emptyListComponent: <span>Empty list</span>,
+  },
 };
 
-WithPaginator.args = {
-  paginator: true,
-  amountPerPage: 3,
-  changePage: (newPage: number) => {
-    console.log('newPage', newPage);
+export const WithHeader: Story = {
+  render: (args) => (
+    <B2Theme>
+      <B2List {...args} />
+    </B2Theme>
+  ),
+  args: {
+    ...Default.args,
+    header: <span>Header</span>,
   },
-  currentPage: 1,
-  total: 6,
+};
+
+export const WithPaginator: Story = {
+  render: (args) => (
+    <B2Theme>
+      <B2List {...args} />
+    </B2Theme>
+  ),
+  args: {
+    ...Default.args,
+    paginator: true,
+    amountPerPage: 3,
+    changePage: (newPage: number) => {
+      console.log('newPage', newPage);
+    },
+    currentPage: 1,
+    total: 6,
+  },
 };

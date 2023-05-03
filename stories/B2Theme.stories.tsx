@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
-import { B2Theme, B2Button, IB2Theme } from '../src';
+import { B2Theme, B2Button } from '../src';
 
-const meta: Meta = {
+const meta: Meta<typeof B2Theme> = {
   title: 'B2Theme',
   component: B2Theme,
   argTypes: {
@@ -22,10 +22,12 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: Story<IB2Theme> = (args) => (
-  <B2Theme {...args}>
-    <B2Button>Primary button on B2BIT Theme</B2Button>
-  </B2Theme>
-);
+type Story = StoryObj<typeof B2Theme>;
 
-export const Default = Template.bind({});
+export const Default: Story = {
+  render: (args) => (
+    <B2Theme>
+      <B2Button>Primary button on B2BIT Theme</B2Button>
+    </B2Theme>
+  ),
+};
