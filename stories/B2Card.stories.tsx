@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
-import { B2Theme, B2Card, IB2Card } from '../src';
+import { B2Theme, B2Card } from '../src';
 
-const meta: Meta = {
+const meta: Meta<typeof B2Card> = {
   title: 'B2Card',
   component: B2Card,
   argTypes: {
@@ -22,10 +22,12 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: Story<IB2Card> = () => (
-  <B2Theme>
-    <B2Card>Card with theme box shadow and border radius</B2Card>
-  </B2Theme>
-);
+type Story = StoryObj<typeof B2Card>;
 
-export const Default = Template.bind({});
+export const Default: Story = {
+  render: (args) => (
+    <B2Theme>
+      <B2Card {...args} />
+    </B2Theme>
+  ),
+};

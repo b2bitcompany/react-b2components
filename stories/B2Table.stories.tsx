@@ -1,47 +1,17 @@
 import React from 'react';
 
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
-import {
-  B2Theme,
-  B2Table,
-  B2TableRow,
-  B2TableDataCell,
-  IB2Table,
-} from '../src';
+import { B2Theme, B2Table, B2TableRow, B2TableDataCell } from '../src';
 
 interface IData {
   id: number;
   name: string;
 }
 
-const meta: Meta = {
+const meta: Meta<typeof B2Table> = {
   title: 'B2Table',
   component: B2Table,
-  argTypes: {
-    headerData: {
-      defaultValue: ['ID', 'Name'],
-    },
-    data: {
-      defaultValue: [
-        { id: 1, name: 'Item 1' },
-        { id: 2, name: 'Item 2' },
-        { id: 3, name: 'Item 3' },
-        { id: 4, name: 'Item 4' },
-      ],
-    },
-    renderRow: {
-      defaultValue: (item: IData) => (
-        <B2TableRow key={item.id}>
-          <B2TableDataCell>{item.id}</B2TableDataCell>
-          <B2TableDataCell>{item.name}</B2TableDataCell>
-        </B2TableRow>
-      ),
-    },
-    emptyTableComponent: {
-      defaultValue: () => <span>Empty list</span>,
-    },
-  },
   parameters: {
     controls: { expanded: true },
   },
@@ -49,21 +19,41 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: Story<IB2Table<IData>> = (args) => (
-  <B2Theme>
-    <B2Table {...args} />
-  </B2Theme>
-);
+type Story = StoryObj<typeof B2Table>;
 
-export const Default = Template.bind({});
-export const WithPaginator = Template.bind({});
-
-WithPaginator.args = {
-  paginator: true,
-  amountPerPage: 3,
-  changePage: (newPage: number) => {
-    console.log('newPage', newPage);
+export const Default: Story = {
+  render: (args) => (
+    <B2Theme>
+      <B2Table {...args} />
+    </B2Theme>
+  ),
+  args: {
+    headerData: ['ID', 'Name'],
+    data: [
+      { id: 1, name: 'Item 1' },
+      { id: 2, name: 'Item 2' },
+      { id: 3, name: 'Item 3' },
+      { id: 4, name: 'Item 4' },
+    ] as IData[],
+    renderRow: (item: unknown) => (
+      <B2TableRow key={(item as IData).id}>
+        <B2TableDataCell>{(item as IData).id}</B2TableDataCell>
+        <B2TableDataCell>{(item as IData).name}</B2TableDataCell>
+      </B2TableRow>
+    ),
+    emptyTableComponent: () => <span>Empty list</span>,
   },
-  currentPage: 1,
-  total: 4,
+};
+
+export const WithPaginator: Story = {
+  ...Default,
+  args: {
+    paginator: true,
+    amountPerPage: 3,
+    changePage: (newPage: number) => {
+      console.log('newPage', newPage);
+    },
+    currentPage: 1,
+    total: 4,
+  },
 };

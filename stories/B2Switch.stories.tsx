@@ -1,18 +1,13 @@
 import React from 'react';
 
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { useArgs } from '@storybook/client-api';
 
-import { B2Theme, B2Switch, IB2Switch } from '../src';
+import { B2Theme, B2Switch } from '../src';
 
-const meta: Meta = {
+const meta: Meta<typeof B2Switch> = {
   title: 'B2Switch',
   component: B2Switch,
-  argTypes: {
-    isChecked: {
-      defaultValue: true,
-    },
-  },
   parameters: {
     controls: { expanded: true },
   },
@@ -20,17 +15,20 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: Story<IB2Switch> = (args) => {
-  const [_, setArgs] = useArgs();
+type Story = StoryObj<typeof B2Switch>;
 
-  return (
-    <B2Theme>
-      <B2Switch
-        {...args}
-        onChange={() => setArgs({ ...args, isChecked: !args.isChecked })}
-      />
-    </B2Theme>
-  );
+export const Default: Story = {
+  render: (args) => {
+    const [_, setArgs] = useArgs();
+
+    return (
+      <B2Theme>
+        <B2Switch
+          {...args}
+          onChange={() => setArgs({ ...args, isChecked: !args.isChecked })}
+        />
+      </B2Theme>
+    );
+  },
+  args: { isChecked: true },
 };
-
-export const Default = Template.bind({});
