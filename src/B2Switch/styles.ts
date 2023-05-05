@@ -1,7 +1,17 @@
 import styled from 'styled-components';
 
-export const CheckBoxWrapper = styled.div`
+interface CheckBoxProps {
+  disabled: boolean;
+}
+
+export const CheckBoxWrapper = styled.div<CheckBoxProps>`
+  display: inline-block;
   position: relative;
+  &,
+  input,
+  label {
+    cursor: ${({ disabled }) => disabled && 'not-allowed'};
+  }
 `;
 
 export const CheckBoxLabel = styled.label`
@@ -11,7 +21,7 @@ export const CheckBoxLabel = styled.label`
   width: 42px;
   height: 26px;
   border-radius: 15px;
-  background: ${(props) => props.theme.colors.error};
+  background: ${({ theme }) => theme.colors.error};
   cursor: pointer;
   &::after {
     content: '';
@@ -33,7 +43,7 @@ export const CheckBox = styled.input`
   width: 42px;
   height: 26px;
   &:checked + ${CheckBoxLabel} {
-    background: ${(props) => props.theme.colors.success};
+    background: ${({ theme }) => theme.colors.success};
     &::after {
       content: '';
       display: block;
