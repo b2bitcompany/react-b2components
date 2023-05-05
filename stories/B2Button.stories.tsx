@@ -29,10 +29,10 @@ export default meta;
 type Story = StoryObj<typeof B2Button>;
 
 export const Default: Story = {
-  render: (args) => (
+  render: args => (
     <B2Theme>
       <B2Button {...args} />
     </B2Theme>
   ),
-  args: { variant: 'primary', children: 'Primary' },
+  args: { variant: 'primary', disabled: false, children: 'Primary' },
 };

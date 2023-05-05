@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export type VariantType = 'primary' | 'secondary' | 'outline' | 'transparent';
 
@@ -7,32 +7,61 @@ export interface IButton {
 }
 
 export const Button = styled.button<IButton>`
-  background-color: ${(props) =>
-    props.variant === 'primary'
-      ? props.theme.colors.main
-      : props.variant === 'secondary'
-      ? props.theme.colors.secondary
-      : 'transparent'};
-  color: ${(props) =>
-    props.variant === 'primary'
-      ? props.theme.colors.buttonText.primary
-      : props.variant === 'secondary'
-      ? props.theme.colors.buttonText.secondary
-      : props.variant === 'outline'
-      ? props.theme.colors.buttonText.outline
-      : props.theme.colors.buttonText.text};
-  font-weight: '600';
-  font-size: 16px;
-  border-radius: ${(props) => props.theme.borderRadius};
-  border: ${(props) =>
-    props.variant === 'outline'
-      ? `1px solid ${props.theme.colors.main}`
-      : 'none'};
-  padding: 10px;
-  transition: opacity 0.25s ease-out;
-  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.5rem 2rem;
+  box-sizing: content-box;
+  border: 2px solid transparent;
+  border-radius: ${({ theme }) => theme.borderRadius};
+  transition: opacity 0.25s ease-out, transform 0.1s ease-in-out;
 
   &:hover {
     opacity: 0.7;
+    cursor: pointer;
   }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  ${({ theme, variant }) =>
+    variant === 'primary' &&
+    css`
+      background-color: ${theme.colors.main};
+      color: ${theme.colors.buttonText.primary};
+    `}
+
+  ${({ theme, variant }) =>
+    variant === 'secondary' &&
+    css`
+      background-color: ${theme.colors.secondary};
+      color: ${theme.colors.buttonText.secondary};
+    `};
+
+  ${({ theme, variant }) =>
+    variant === 'outline' &&
+    css`
+      color: ${theme.colors.main};
+      border: ${`2px solid ${theme.colors.main}`};
+      background-color: transparent;
+    `}
+
+    ${({ theme, variant }) =>
+      variant === 'transparent' &&
+      css`
+        background-color: transparent;
+        color: ${theme.colors.main};
+      `}
+
+  ${({ theme, disabled }) =>
+    disabled &&
+    css`
+      border: 2px solid transparent;
+      color: ${theme.colors.gray.five};
+      background-color: ${theme.colors.gray.one};
+      &:hover {
+        transform: scale(1);
+        cursor: not-allowed;
+      }
+    `};
 `;
