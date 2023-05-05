@@ -13,6 +13,31 @@ export interface ITheme {
     success: string;
     danger: string;
     error: string;
+    black: {
+      main: string;
+      one: string;
+      two: string;
+    };
+    white: {
+      main: string;
+      one: string;
+      two: string;
+      three: string;
+    };
+    gray: {
+      one: string;
+      two: string;
+      three: string;
+      four: string;
+      five: string;
+      six: string;
+      seven: string;
+      eight: string;
+      nine: string;
+      ten: string;
+      eleven: string;
+      twelve: string;
+    };
     buttonText: {
       primary: string;
       secondary: string;
