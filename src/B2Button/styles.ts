@@ -10,7 +10,6 @@ export const Button = styled.button<IButton>`
   font-size: 1rem;
   font-weight: 600;
   padding: 0.5rem 2rem;
-  box-sizing: content-box;
   border: 2px solid transparent;
   border-radius: ${({ theme }) => theme.borderRadius};
   transition: opacity 0.25s ease-out, transform 0.1s ease-in-out;
