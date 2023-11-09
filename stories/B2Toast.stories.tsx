@@ -18,7 +18,7 @@ export default meta;
 type Story = StoryObj<typeof B2Toast>;
 
 export const Default: Story = {
-  render: (args) => {
+  render: args => {
     const [_, setArgs] = useArgs();
 
     return (
@@ -36,6 +36,7 @@ export const Default: Story = {
                   text: 'Success',
                 },
               ],
+              button: { text: 'Click me', onClick: () => alert('Clicked') },
             });
           }}
         >
@@ -43,10 +44,10 @@ export const Default: Story = {
         </B2Button>
         <B2Toast
           {...args}
-          remove={(id) =>
+          remove={id =>
             setArgs({
               ...args,
-              list: args.list.filter((tost) => tost.id !== id),
+              list: args.list.filter(tost => tost.id !== id),
             })
           }
         />
