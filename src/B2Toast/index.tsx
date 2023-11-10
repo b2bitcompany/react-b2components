@@ -1,9 +1,21 @@
 import React from 'react';
 
 import { MdError, MdWarning, MdInfo, MdDone } from 'react-icons/md';
-import { Container, Toast, ToastText, CloseIcon } from './styles';
+import {
+  Container,
+  Toast,
+  CloseIcon,
+  ButtonContainer,
+  CustomButton,
+  ToastGroup,
+  ToastText,
+} from './styles';
 
 export type ToastType = 'success' | 'error' | 'warning' | 'info';
+
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  text: string;
+}
 
 export interface IToast {
   id: string;
@@ -14,6 +26,7 @@ export interface IToast {
 export interface IB2Toast {
   list: IToast[];
   remove: (id: string) => void;
+  buttonProps?: ButtonProps;
 }
 
 const icons = {
@@ -30,16 +43,27 @@ const backgroundColor = {
   success: '#00A000',
 };
 
-export const B2Toast: React.FC<IB2Toast> = ({ list, remove }) => (
+export const B2Toast: React.FC<IB2Toast> = ({ list, remove, buttonProps }) => (
   <Container>
-    {list.map((toast) => {
+    {list.map(toast => {
       const Icon = icons[toast.type];
 
       return (
         <Toast key={toast.id} backgroundColor={backgroundColor[toast.type]}>
-          <Icon size="20" style={{ marginRight: 10 }} />
-          <ToastText>{toast.text}</ToastText>
-          <CloseIcon onClick={() => remove(toast.id)} size="15" />
+          <ToastGroup>
+            <Icon size="20" />
+            <ToastText>{toast.text}</ToastText>
+          </ToastGroup>
+          <ToastGroup>
+            {buttonProps && (
+              <ButtonContainer>
+                <CustomButton variant="outline" {...buttonProps}>
+                  {buttonProps.text}
+                </CustomButton>
+              </ButtonContainer>
+            )}
+            <CloseIcon onClick={() => remove(toast.id)} size="15" />
+          </ToastGroup>
         </Toast>
       );
     })}
