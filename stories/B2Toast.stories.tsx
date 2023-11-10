@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import { useArgs } from '@storybook/client-api';
 
-import { B2Theme, B2Button, B2Toast } from '../src';
+import { B2Theme, B2Button, B2Toast, IB2Toast } from '../src';
 
 const meta: Meta<typeof B2Toast> = {
   title: 'B2Toast',
@@ -19,7 +19,7 @@ type Story = StoryObj<typeof B2Toast>;
 
 export const Default: Story = {
   render: args => {
-    const [_, setArgs] = useArgs();
+    const [_, setArgs] = useArgs<IB2Toast>();
 
     return (
       <B2Theme>
@@ -36,7 +36,10 @@ export const Default: Story = {
                   text: 'Success',
                 },
               ],
-              button: { text: 'Click me', onClick: () => alert('Clicked') },
+              buttonProps: {
+                text: 'Click me',
+                onClick: () => alert('Clicked'),
+              },
             });
           }}
         >

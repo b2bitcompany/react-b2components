@@ -26,7 +26,7 @@ export interface IToast {
 export interface IB2Toast {
   list: IToast[];
   remove: (id: string) => void;
-  button?: ButtonProps;
+  buttonProps?: ButtonProps;
 }
 
 const icons = {
@@ -43,7 +43,7 @@ const backgroundColor = {
   success: '#00A000',
 };
 
-export const B2Toast: React.FC<IB2Toast> = ({ list, remove, button }) => (
+export const B2Toast: React.FC<IB2Toast> = ({ list, remove, buttonProps }) => (
   <Container>
     {list.map(toast => {
       const Icon = icons[toast.type];
@@ -55,10 +55,10 @@ export const B2Toast: React.FC<IB2Toast> = ({ list, remove, button }) => (
             <ToastText>{toast.text}</ToastText>
           </ToastGroup>
           <ToastGroup>
-            {button && (
+            {buttonProps && (
               <ButtonContainer>
-                <CustomButton variant="outline" {...button}>
-                  {button.text}
+                <CustomButton variant="outline" {...buttonProps}>
+                  {buttonProps.text}
                 </CustomButton>
               </ButtonContainer>
             )}
