@@ -1,17 +1,16 @@
-import React from 'react';
 import { nanoid } from 'nanoid';
+import React from 'react';
 
 import {
+  ButtonsPage,
   Container,
   Table,
-  TableHeader,
-  TableRow,
-  TableH,
   TableBody,
   TableDataCell,
+  TableH,
+  TableHeader,
+  TableRow,
 } from './styles';
-
-import { B2ButtonsPage } from '../B2ButtonsPage';
 
 interface IB2Table<T> {
   headerData: Array<string>;
@@ -44,7 +43,7 @@ const B2Table = <T extends unknown>({
     return (
       <TableHeader>
         <TableRow>
-          {headerData.map((header) => (
+          {headerData.map(header => (
             <TableH key={nanoid()}>
               <div>{header}</div>
             </TableH>
@@ -86,7 +85,7 @@ const B2Table = <T extends unknown>({
 
     if (paginator && changePage && currentPage && pages > 1) {
       return (
-        <B2ButtonsPage
+        <ButtonsPage
           pages={pages}
           changePage={changePage}
           currentPage={currentPage}
@@ -111,8 +110,8 @@ const B2Table = <T extends unknown>({
 };
 
 export {
-  IB2Table,
   B2Table,
-  TableRow as B2TableRow,
   TableDataCell as B2TableDataCell,
+  TableRow as B2TableRow,
+  IB2Table,
 };
