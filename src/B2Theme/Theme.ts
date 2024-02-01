@@ -6,7 +6,7 @@ const defaultTheme: ITheme = {
   colors: {
     main: '#02274F',
     secondary: '#FDCF00',
-    tertiary: '#02274F1a',
+    tertiary: '#02274F1A',
     quaternary: 'transparent',
     info: '#2F80ED',
     success: '#27AE60',
