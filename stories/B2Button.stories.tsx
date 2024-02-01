@@ -9,7 +9,14 @@ const meta: Meta<typeof B2Button> = {
   component: B2Button,
   argTypes: {
     variant: {
-      options: ['primary', 'secondary', 'outline', 'transparent'],
+      options: [
+        'primary',
+        'secondary',
+        'tertiary',
+        'quaternary',
+        'outline',
+        'transparent',
+      ],
       control: { type: 'radio' },
     },
     children: {
@@ -34,5 +41,5 @@ export const Default: Story = {
       <B2Button {...args} />
     </B2Theme>
   ),
-  args: { variant: 'primary', disabled: false, children: 'Primary' },
+  args: { variant: 'primary', disabled: false, children: 'B2Button' },
 };
