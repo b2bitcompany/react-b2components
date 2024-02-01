@@ -1,6 +1,12 @@
 import styled, { css } from 'styled-components';
 
-export type VariantType = 'primary' | 'secondary' | 'outline' | 'transparent';
+export type VariantType =
+  | 'primary'
+  | 'secondary'
+  | 'tertiary'
+  | 'quaternary'
+  | 'outline'
+  | 'transparent';
 
 export interface IButton {
   variant: VariantType;
@@ -35,6 +41,20 @@ export const Button = styled.button<IButton>`
     css`
       background-color: ${theme.colors.secondary};
       color: ${theme.colors.buttonText.secondary};
+    `};
+
+  ${({ theme, variant }) =>
+    variant === 'tertiary' &&
+    css`
+      background-color: ${theme.colors.tertiary};
+      color: ${theme.colors.buttonText.tertiary};
+    `};
+
+  ${({ theme, variant }) =>
+    variant === 'quaternary' &&
+    css`
+      background-color: ${theme.colors.quaternary};
+      color: ${theme.colors.buttonText.quaternary};
     `};
 
   ${({ theme, variant }) =>

@@ -1,6 +1,5 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
-
 import defaultTheme from './Theme';
 
 export interface ITheme {
@@ -9,6 +8,8 @@ export interface ITheme {
   colors: {
     main: string;
     secondary: string;
+    tertiary: string;
+    quaternary: string;
     info: string;
     success: string;
     danger: string;
@@ -41,6 +42,8 @@ export interface ITheme {
     buttonText: {
       primary: string;
       secondary: string;
+      tertiary: string;
+      quaternary: string;
       outline: string;
       text: string;
     };

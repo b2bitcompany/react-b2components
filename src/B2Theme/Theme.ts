@@ -1,9 +1,13 @@
-export default {
+import { ITheme } from '.';
+
+const defaultTheme: ITheme = {
   borderRadius: '16px',
   boxShadow: '0px 4px 16px 0px #00000040',
   colors: {
     main: '#02274F',
     secondary: '#FDCF00',
+    tertiary: '#02274F1A',
+    quaternary: 'transparent',
     info: '#2F80ED',
     success: '#27AE60',
     danger: '#E2B93B',
@@ -36,6 +40,12 @@ export default {
     buttonText: {
       primary: '#FFFFFF',
       secondary: '#FFFFFF',
+      tertiary: '#02274F',
+      quaternary: '#BFBFBF',
+      outline: '#FDCF00',
+      text: '#02274F',
     },
   },
 };
+
+export default defaultTheme;
