@@ -8,7 +8,6 @@ export const Container = styled.div`
   background-color: ${props => props.theme.colors.white.one};
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
   padding-bottom: 1.5rem;
 `;
 
