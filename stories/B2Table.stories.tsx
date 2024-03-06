@@ -63,7 +63,7 @@ export const Default: Story = {
   },
 };
 
-export const WithPaginator: Story = {
+export const WithPaginationFooterText: Story = {
   ...Default,
   args: {
     ...Default.args,
