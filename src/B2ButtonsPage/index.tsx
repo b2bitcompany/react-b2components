@@ -71,16 +71,18 @@ export const B2ButtonsPage: React.FC<IB2ButtonsPage> = ({
       newButtons.push(<span key={nanoid()}>...</span>);
     }
 
-    newButtons.push(
-      <Button
-        key={nanoid()}
-        onClick={() => changePage && changePage(pages)}
-        variant="transparent"
-        disabled={currentPage === pages}
-      >
-        {pages}
-      </Button>
-    );
+    if (pages > 1) {
+      newButtons.push(
+        <Button
+          key={nanoid()}
+          onClick={() => changePage && changePage(pages)}
+          variant="transparent"
+          disabled={currentPage === pages}
+        >
+          {pages}
+        </Button>
+      );
+    }
 
     if (currentPage !== pages) {
       newButtons.push(

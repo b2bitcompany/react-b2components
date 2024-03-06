@@ -45,6 +45,14 @@ export const Default: Story = {
       { id: 13, name: 'Item 13' },
       { id: 14, name: 'Item 14' },
     ] as IData[],
+    paginator: {
+      amountPerPage: 20,
+      changePage: (newPage: number) => {
+        console.log('newPage', newPage);
+      },
+      currentPage: 1,
+      total: 20,
+    },
     renderRow: (item: unknown) => (
       <B2TableRow key={(item as IData).id}>
         <B2TableDataCell>{(item as IData).id}</B2TableDataCell>
@@ -59,12 +67,16 @@ export const WithPaginator: Story = {
   ...Default,
   args: {
     ...Default.args,
-    removePagination: false,
-    amountPerPage: 2,
-    changePage: (newPage: number) => {
-      console.log('newPage', newPage);
+    paginator: {
+      amountPerPage: 5,
+      changePage: (newPage: number) => {
+        console.log('newPage', newPage);
+      },
+      currentPage: 1,
+      total: 10,
+      paginationFooterText(params) {
+        return `Showing ${params.initialCount} - ${params.finalCount} of ${params.total}`;
+      },
     },
-    currentPage: 5,
-    total: 10,
   },
 };

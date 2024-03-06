@@ -26,13 +26,14 @@ interface IB2Table<T> {
   data: Array<T>;
   renderRow: (value: T, index: number) => React.ReactElement;
   emptyTableComponent?: () => React.ReactElement;
-  removePagination?: boolean;
-  amountPerPage?: number;
-  changePage?: (newPage: number) => void;
-  currentPage?: number;
-  total?: number;
+  paginator: {
+    amountPerPage: number;
+    changePage: (newPage: number) => void;
+    currentPage: number;
+    total: number;
+    paginationFooterText?: (params: IPaginationFooterText) => string;
+  };
   className?: string;
-  paginationFooterText?: (params: IPaginationFooterText) => string;
 }
 
 const B2Table = <T extends unknown>({
@@ -40,21 +41,23 @@ const B2Table = <T extends unknown>({
   data,
   renderRow,
   emptyTableComponent,
-  removePagination = false,
-  amountPerPage,
-  changePage,
-  currentPage,
-  total,
+  paginator,
   className,
-  paginationFooterText,
 }: IB2Table<T>) => {
-  const totalCount = total || 0;
-  const newCurrentPage = currentPage || 0;
+  const {
+    amountPerPage,
+    changePage,
+    currentPage,
+    paginationFooterText,
+    total,
+  } = paginator;
+
+  const totalCount = total;
 
   const pages = totalCount === 0 ? 1 : Math.ceil(totalCount / amountPerPage!);
 
   const paginationInitialCount =
-    totalCount === 0 ? 0 : amountPerPage! * (newCurrentPage - 1) + 1;
+    totalCount === 0 ? 0 : amountPerPage! * (currentPage - 1) + 1;
 
   const paginationFinalCount =
     paginationInitialCount + (amountPerPage! - 1) < totalCount
@@ -62,14 +65,6 @@ const B2Table = <T extends unknown>({
       : totalCount;
 
   const getMessage = () => {
-    const teste = !total || !currentPage || !amountPerPage;
-
-    if (paginationFooterText && teste) {
-      throw new Error(
-        'You must provide a total value, currentPage function and amountPerPage value to render pagination.'
-      );
-    }
-
     return paginationFooterText?.({
       initialCount: paginationInitialCount,
       finalCount: paginationFinalCount,
@@ -92,7 +87,7 @@ const B2Table = <T extends unknown>({
   };
 
   const renderBody = () => {
-    if (removePagination && amountPerPage && currentPage) {
+    if (paginator && amountPerPage && currentPage) {
       return data.slice(0, amountPerPage).map(renderRow);
     }
 
@@ -115,22 +110,13 @@ const B2Table = <T extends unknown>({
   };
 
   const renderButtons = () => {
-    if (removePagination && paginationFooterText) {
-      throw new Error(
-        'Not is possible to render paginationFooterText function without pagination.'
-      );
-    }
-    if (removePagination) {
-      return null;
-    }
-
     return (
       <FooterContainer>
         <FooterMessage>{getMessage()}</FooterMessage>
         <ButtonsPage
           pages={pages}
-          currentPage={newCurrentPage}
-          changePage={changePage!}
+          currentPage={currentPage}
+          changePage={changePage}
         />
       </FooterContainer>
     );

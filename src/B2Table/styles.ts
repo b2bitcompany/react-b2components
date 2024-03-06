@@ -17,7 +17,7 @@ export const TableContainer = styled.div`
 
 export const FooterContainer = styled.div`
   display: flex;
-  margin: 1rem 0.5rem 0.5rem;
+  margin: 1rem 2rem 0.5rem;
   align-items: center;
   justify-content: space-between;
 `;
@@ -47,7 +47,7 @@ export const TableH = styled.th`
   font-size: 0.875rem;
   font-weight: 700;
   border-bottom: 1px solid ${props => props.theme.colors.gray.one};
-  padding: 0px 4rem;
+  padding: 0px 2rem;
 
   & > div {
     display: flex;
@@ -79,7 +79,7 @@ export const TableDataCell = styled.td`
   color: ${props => props.theme.colors.gray.eleven};
   font-style: normal;
   font-weight: 500;
-  padding: 0px 4rem;
+  padding: 0px 2rem;
 `;
 
 export const ButtonsPage = styled(B2ButtonsPage)`
