@@ -11,10 +11,25 @@ export const Container = styled.div`
   padding-bottom: 1.5rem;
 `;
 
+export const TableContainer = styled.div`
+  overflow-x: auto;
+`;
+
+export const FooterContainer = styled.div`
+  display: flex;
+  margin: 1rem 0.5rem 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const FooterMessage = styled.span`
+  color: ${props => props.theme.colors.gray.ten};
+  font-size: 1rem;
+`;
+
 export const Table = styled.table`
   width: 100%;
   border-spacing: 0px;
-  overflow-x: auto;
 `;
 
 export const TableHeader = styled.thead``;

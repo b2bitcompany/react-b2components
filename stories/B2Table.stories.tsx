@@ -59,7 +59,7 @@ export const WithPaginator: Story = {
   ...Default,
   args: {
     ...Default.args,
-    paginator: true,
+    removePagination: false,
     amountPerPage: 2,
     changePage: (newPage: number) => {
       console.log('newPage', newPage);
