@@ -17,13 +17,22 @@ export const TableContainer = styled.div`
 
 export const FooterContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   margin: 1rem 2rem 0.5rem;
   align-items: center;
   justify-content: space-between;
+  gap: 1rem;
+
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
 `;
 
 export const FooterMessage = styled.span`
+  text-align: center;
   color: ${props => props.theme.colors.gray.ten};
+  max-width: 250px;
+  word-wrap: break-word;
   font-size: 1rem;
 `;
 
@@ -84,4 +93,8 @@ export const TableDataCell = styled.td`
 
 export const ButtonsPage = styled(B2ButtonsPage)`
   padding: 0px 0.5rem;
+  min-width: 250px;
+  display: flex;
+  justify-content: center;
+  word-wrap: break-word;
 `;
