@@ -8,14 +8,37 @@ export const Container = styled.div`
   background-color: ${props => props.theme.colors.white.one};
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
   padding-bottom: 1.5rem;
+`;
+
+export const TableContainer = styled.div`
+  overflow-x: auto;
+`;
+
+export const FooterContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1rem 2rem 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
+`;
+
+export const FooterMessage = styled.span`
+  text-align: center;
+  color: ${props => props.theme.colors.gray.ten};
+  max-width: 250px;
+  word-wrap: break-word;
+  font-size: 1rem;
 `;
 
 export const Table = styled.table`
   width: 100%;
   border-spacing: 0px;
-  overflow-x: auto;
 `;
 
 export const TableHeader = styled.thead``;
@@ -33,7 +56,7 @@ export const TableH = styled.th`
   font-size: 0.875rem;
   font-weight: 700;
   border-bottom: 1px solid ${props => props.theme.colors.gray.one};
-  padding: 0px 4rem;
+  padding: 0px 2rem;
 
   & > div {
     display: flex;
@@ -65,9 +88,13 @@ export const TableDataCell = styled.td`
   color: ${props => props.theme.colors.gray.eleven};
   font-style: normal;
   font-weight: 500;
-  padding: 0px 4rem;
+  padding: 0px 2rem;
 `;
 
 export const ButtonsPage = styled(B2ButtonsPage)`
   padding: 0px 0.5rem;
+  min-width: 250px;
+  display: flex;
+  justify-content: center;
+  word-wrap: break-word;
 `;
